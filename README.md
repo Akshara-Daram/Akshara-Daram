@@ -1,4 +1,4 @@
-## The code has been uploaded in a ipynb file all we have to do is run it in a python IDE 
+## Hello
 
 <!--
 **Akshara-Daram/Akshara-Daram** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.

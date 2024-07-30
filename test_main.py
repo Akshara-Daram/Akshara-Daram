@@ -6,15 +6,13 @@ class RevenueTestCases(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        # Sample data in CSV format
         data = """order_id,customer_id,order_date,product_id,product_name,product_price,quantity
 1,1,2023-01-01,101,Item X,120,2
 2,2,2023-01-05,102,Item Y,250,1
 3,1,2023-02-10,101,Item X,120,4
 4,3,2023-02-15,103,Item Z,350,1
 5,4,2023-03-20,104,Item W,450,3
-"""
-        # Load the CSV data into a DataFrame
+"""e
         cls.df = pd.read_csv(StringIO(data))
         cls.df['order_date'] = pd.to_datetime(cls.df['order_date'])
         cls.df['revenue'] = cls.df['product_price'] * cls.df['quantity']

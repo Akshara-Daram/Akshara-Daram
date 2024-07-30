@@ -1,35 +1,31 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-#reading the csv file
-orders = pd.read_csv('orders.csv')
-orders['order_date'] = pd.to_datetime(orders['order_date'])
+# Read the CSV file
+orders_df = pd.read_csv('/content/orders.csv')
 
-orders['month'] = orders['order_date'].dt.to_period('M')
-orders['revenue'] = orders['product_price'] * orders['quantity']
+# Compute total revenue for each order
+orders_df['total_revenue'] = orders_df['product_price'] * orders_df['quantity']
 
-#Revenue for each month
-monthly_revenue = orders.groupby('month')['revenue'].sum().reset_index()
-monthly_revenue.columns = ['month', 'total_revenue']
-
-#Revenue for each product
-product_revenue = orders.groupby('product_id')['revenue'].sum().reset_index()
-product_revenue.columns = ['product_id', 'total_revenue']
-
-#Total revenue for each customer
-customer_revenue = orders.groupby('customer_id')['revenue'].sum().reset_index()
-customer_revenue.columns = ['customer_id', 'total_revenue']
-
-#Top 10 customers
-top_customers = customer_revenue.sort_values(by='total_revenue', ascending=False).head(10)
-
-print("Total monthly revenue:")
+# Converting order_date to datetime for month calculation and then calculating the monthly revenue
+orders_df['order_date'] = pd.to_datetime(orders_df['order_date'])
+orders_df['month'] = orders_df['order_date'].dt.to_period('M')
+monthly_revenue = orders_df.groupby('month')['total_revenue'].sum().reset_index()
+print("Monthly Revenue:")
 print(monthly_revenue)
 
-print("\nTotal product revenue")
+# Total revenue for each product
+product_revenue = orders_df.groupby(['product_id', 'product_name'])['total_revenue'].sum().reset_index()
+print("\nProduct Revenue:")
 print(product_revenue)
 
-print("\nTotal Customer revenue:")
+# Total revenue for each customer
+customer_revenue = orders_df.groupby('customer_id')['total_revenue'].sum().reset_index()
+print("\nCustomer Revenue:")
 print(customer_revenue)
 
-print("\nTop 10 customers:")
+# Top 10 customers
+top_customers = customer_revenue.sort_values(by='total_revenue', ascending=False).head(10)
+print("\nTop 10 Customers by Revenue:")
 print(top_customers)

@@ -1,4 +1,4 @@
-## Hello
+##This code calculates the monthly revenue,revenue by customer and revenue by customer,top 10 customers
 
 <!--
 **Akshara-Daram/Akshara-Daram** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
